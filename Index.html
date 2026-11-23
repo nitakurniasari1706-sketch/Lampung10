@@ -1,0 +1,653 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Ujian Bahasa Lampung</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: start = hero kiri + form kanan; ujian = bar sticky, kolom soal + kolom navigasi; hasil = kartu nilai + pembahasan.
+   Palet: navy (tinta/bar), teal sungai (terjawab), emas siger (ragu-ragu), merah tapis (aksi/peringatan). */
+:root{
+  --bg:#EAF4F3; --surface:#FFFFFF; --surface-2:#F2F8F7; --ink:#12263A; --muted:#566878; --line:#D3E3E1;
+  --bar-bg:#0F2A43; --bar-ink:#FFFFFF; --hero-a:#0F2A43; --hero-b:#0E7F7B; --hero-ink:#FFFFFF; --hero-muted:#BFE3E0;
+  --teal:#0E8F8A; --teal-ink:#FFFFFF; --teal-soft:#D8F0EE;
+  --gold:#F2B134; --gold-ink:#3A2700; --gold-soft:#FDEFCB;
+  --red:#C93A44; --red-ink:#FFFFFF; --red-soft:#FBE3E5;
+  --ok:#1B8F59; --ok-soft:#DDF3E8; --bad:#C8353F; --bad-soft:#FBE3E5;
+  --ring:#C93A44; --shadow:0 1px 2px rgba(15,42,67,.08),0 10px 28px rgba(15,42,67,.09);
+  --f-display:'Fraunces',Georgia,'Times New Roman',serif;
+  --f-body:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#08151F; --surface:#10222F; --surface-2:#0B1B27; --ink:#E7F0F3; --muted:#9AAEBB; --line:#24404F;
+  --bar-bg:#0A1D2C; --hero-a:#0A1D2C; --hero-b:#0B5E5C; --hero-muted:#A9D3D0;
+  --teal:#2BB8B1; --teal-ink:#04201F; --teal-soft:#123B3B;
+  --gold:#F2B134; --gold-soft:#3B2E10; --red:#E0525C; --red-soft:#3C1B20;
+  --ok:#3CC68A; --ok-soft:#123A2A; --bad:#F0707A; --bad-soft:#3C1B20; --ring:#FF8A91;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.35); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#08151F; --surface:#10222F; --surface-2:#0B1B27; --ink:#E7F0F3; --muted:#9AAEBB; --line:#24404F;
+  --bar-bg:#0A1D2C; --hero-a:#0A1D2C; --hero-b:#0B5E5C; --hero-muted:#A9D3D0;
+  --teal:#2BB8B1; --teal-ink:#04201F; --teal-soft:#123B3B;
+  --gold:#F2B134; --gold-soft:#3B2E10; --red:#E0525C; --red-soft:#3C1B20;
+  --ok:#3CC68A; --ok-soft:#123A2A; --bad:#F0707A; --bad-soft:#3C1B20; --ring:#FF8A91;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.35); color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55;
+  -webkit-text-size-adjust:100%;padding-left:max(0px,env(safe-area-inset-left,0px));padding-right:max(0px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bar-bg);z-index:10}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{text-wrap:balance}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--ring);outline-offset:2px}
+.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));max-width:1180px;margin:0 auto}
+.tumpal{height:12px;background:var(--gold);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='12'%3E%3Cpath d='M0 12L12 0l12 12z'/%3E%3C/svg%3E") repeat-x 0 0/24px 12px;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='12'%3E%3Cpath d='M0 12L12 0l12 12z'/%3E%3C/svg%3E") repeat-x 0 0/24px 12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+.btn{border:0;border-radius:10px;padding:.75rem 1.2rem;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;transition:transform .08s,filter .15s}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--red);color:var(--red-ink)}
+.btn-primary:hover{filter:brightness(1.08)}
+.btn-teal{background:var(--teal);color:var(--teal-ink)}
+.btn-ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
+.btn-ghost:hover{background:var(--surface-2)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.eyebrow{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+
+/* ===== MULAI ===== */
+.start{min-height:100vh;min-height:100dvh;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}
+.start-hero{background:linear-gradient(155deg,var(--hero-a),var(--hero-b));color:var(--hero-ink);display:flex;flex-direction:column;gap:1.4rem;
+  padding:calc(env(safe-area-inset-top,0px) + 2.5rem) clamp(1.25rem,4vw,3.5rem) 2.5rem;padding-left:max(16px,calc(env(safe-area-inset-left,0px) + 1rem));position:relative;overflow:hidden}
+.start-hero .eyebrow{color:var(--gold)}
+.start-hero h1{font-family:var(--f-display);font-weight:700;font-size:clamp(2rem,4.6vw,3.4rem);line-height:1.05;letter-spacing:-.01em}
+.start-hero .sub{font-size:1.15rem;color:var(--hero-muted);font-weight:500}
+.facts{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.6rem}
+.facts li{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:.35rem .9rem;font-size:.9rem}
+.facts b{font-size:1.05rem;color:var(--gold)}
+.rules{background:rgba(0,0,0,.2);border-radius:14px;padding:1.1rem 1.3rem}
+.rules h2{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
+.rules ol{margin:0;padding-left:1.2rem;display:grid;gap:.4rem;font-size:.92rem}
+.rules strong{color:var(--gold)}
+.motto{margin-top:auto;font-family:var(--f-display);font-size:1.25rem;font-style:italic;color:var(--hero-muted)}
+.start-hero .tumpal{position:absolute;left:0;right:0;bottom:0;opacity:.9}
+.start-side{display:flex;align-items:center;justify-content:center;padding:calc(env(safe-area-inset-top,0px) + 2rem) max(16px,env(safe-area-inset-right,0px)) 2rem 1.25rem}
+.start-form{width:100%;max-width:460px;padding:1.6rem;display:grid;gap:1rem}
+.start-form h2{font-family:var(--f-display);font-size:1.5rem}
+.start-form .lead{color:var(--muted);font-size:.9rem;margin-top:-.4rem}
+.field{display:grid;gap:.3rem}
+.field label{font-weight:600;font-size:.85rem}
+.field input{background:var(--surface-2);border:1.5px solid var(--line);border-radius:10px;padding:.7rem .85rem;width:100%;min-width:0}
+.field input:focus{border-color:var(--teal);outline:none;box-shadow:0 0 0 3px var(--teal-soft)}
+.field input.bad{border-color:var(--bad)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.token-field input{font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+.err{color:var(--bad);font-size:.85rem;font-weight:600;min-height:1.2em}
+.linkbtn{background:none;border:0;color:var(--muted);text-decoration:underline;font-size:.82rem;padding:.2rem;justify-self:center}
+
+/* ===== UJIAN ===== */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bar-bg);color:var(--bar-ink)}
+.bar-in{display:flex;align-items:center;gap:1rem;padding-block:.65rem;flex-wrap:wrap}
+.who{min-width:0;flex:1 1 200px}
+.who b{display:block;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.who span{font-size:.8rem;opacity:.75;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip{display:inline-flex;align-items:center;gap:.4rem;border-radius:999px;padding:.3rem .75rem;font-size:.8rem;font-weight:700;background:rgba(255,255,255,.14)}
+.chip.warn{background:var(--gold);color:var(--gold-ink)}
+.timer{font-variant-numeric:tabular-nums;font-weight:700;font-size:1.25rem;background:var(--teal);color:var(--teal-ink);border-radius:10px;padding:.3rem .8rem;min-width:6.2rem;text-align:center;font-family:ui-monospace,Menlo,Consolas,monospace}
+.timer.low{background:var(--red);color:var(--red-ink);animation:pulse 1s infinite}
+@keyframes pulse{50%{filter:brightness(1.3)}}
+.pbar{height:4px;background:rgba(255,255,255,.18)}
+.pbar i{display:block;height:100%;width:0;background:var(--gold);transition:width .25s}
+.exam-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:1.2rem;padding-block:1.2rem 5.5rem;align-items:start}
+.qcard{padding:1.5rem}
+.qmeta{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-bottom:.9rem}
+.qno{font-family:var(--f-display);font-weight:700;font-size:1.05rem;background:var(--navy-chip,var(--bar-bg));color:var(--bar-ink);border-radius:8px;padding:.15rem .7rem}
+.topic{font-size:.78rem;font-weight:700;color:var(--teal);letter-spacing:.06em;text-transform:uppercase}
+.badge-doubt{background:var(--gold);color:var(--gold-ink);border-radius:999px;font-size:.75rem;font-weight:700;padding:.15rem .6rem}
+#qText{font-size:1.18rem;line-height:1.5;font-weight:600;margin-bottom:1.2rem;max-width:68ch}
+.opts{display:grid;gap:.65rem}
+.opt{display:flex;gap:.85rem;align-items:flex-start;text-align:left;width:100%;background:var(--surface-2);border:1.5px solid var(--line);border-radius:12px;padding:.8rem .95rem;transition:border-color .12s,background .12s}
+.opt:hover{border-color:var(--teal)}
+.opt .l{flex:none;width:2rem;height:2rem;border-radius:50%;display:grid;place-items:center;font-weight:700;background:var(--surface);border:1.5px solid var(--line)}
+.opt .t{padding-top:.2rem;min-width:0;overflow-wrap:anywhere}
+.opt[aria-checked="true"]{border-color:var(--teal);background:var(--teal-soft)}
+.opt[aria-checked="true"] .l{background:var(--teal);color:var(--teal-ink);border-color:var(--teal)}
+.actions{position:fixed;left:0;right:0;bottom:0;z-index:15;background:var(--surface);border-top:1px solid var(--line);box-shadow:0 -6px 20px rgba(15,42,67,.1)}
+.actions-in{display:grid;grid-template-columns:1fr auto 1fr;gap:.6rem;padding-block:.7rem;padding-bottom:calc(.7rem + env(safe-area-inset-bottom,0px));max-width:1180px;margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.actions .btn{min-width:0}
+#btnPrev{justify-self:start}#btnNext{justify-self:end}
+.btn-doubt{background:var(--gold);color:var(--gold-ink)}
+.btn-doubt[aria-pressed="true"]{box-shadow:inset 0 0 0 3px var(--gold-ink)}
+.navcol{padding:1.1rem;position:sticky;top:calc(env(safe-area-inset-top,0px) + 5.2rem)}
+.navcol h3{font-family:var(--f-display);font-size:1.1rem;margin-bottom:.7rem}
+.counts{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:.9rem}
+.counts div{border-radius:10px;padding:.45rem .3rem;text-align:center;font-size:.72rem;font-weight:600;line-height:1.2}
+.counts b{display:block;font-size:1.25rem;font-variant-numeric:tabular-nums}
+.c-ans{background:var(--teal);color:var(--teal-ink)}.c-doubt{background:var(--gold);color:var(--gold-ink)}.c-none{background:var(--surface-2);border:1.5px solid var(--line)}
+.ngrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(42px,1fr));gap:.4rem}
+.n{height:42px;border-radius:9px;font-weight:700;font-variant-numeric:tabular-nums;border:1.5px solid var(--line);background:var(--surface-2);color:var(--ink)}
+.n.ans{background:var(--teal);border-color:var(--teal);color:var(--teal-ink)}
+.n.doubt{background:var(--gold);border-color:var(--gold);color:var(--gold-ink)}
+.n.cur{outline:3px solid var(--ring);outline-offset:1px}
+.navcol .btn{width:100%;margin-top:1rem}
+
+/* ===== HASIL ===== */
+.res-hero{background:linear-gradient(155deg,var(--hero-a),var(--hero-b));color:var(--hero-ink);padding-top:calc(env(safe-area-inset-top,0px) + 2rem)}
+.res-hero-in{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2rem;align-items:center;padding-bottom:2.2rem}
+.score{width:190px;height:190px;border-radius:50%;background:var(--surface);color:var(--ink);display:grid;place-content:center;text-align:center;border:8px solid var(--gold);box-shadow:var(--shadow)}
+.score b{font-family:var(--f-display);font-size:4rem;line-height:1;font-variant-numeric:tabular-nums}
+.score span{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.res-info h1{font-family:var(--f-display);font-size:clamp(1.6rem,3.4vw,2.3rem);line-height:1.1;overflow-wrap:anywhere}
+.res-info .pred{color:var(--gold);font-weight:700;margin:.2rem 0 .8rem}
+.idl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.4rem 1.5rem;margin:0}
+.idl div{min-width:0}.idl dt{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--hero-muted)}
+.idl dd{margin:0;font-weight:600;overflow-wrap:anywhere}
+.status{margin-top:1.2rem;border-radius:12px;padding:.8rem 1rem;font-weight:600;background:rgba(255,255,255,.14)}
+.status.cheat{background:var(--red);color:var(--red-ink)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.8rem;margin-top:1.2rem}
+.stat{padding:1rem;text-align:center}.stat b{display:block;font-family:var(--f-display);font-size:2rem;line-height:1.1;font-variant-numeric:tabular-nums}
+.stat span{font-size:.8rem;color:var(--muted);font-weight:600}
+.stat.ok b{color:var(--ok)}.stat.no b{color:var(--bad)}
+.toolbar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between;margin:1.8rem 0 1rem}
+.toolbar h2{font-family:var(--f-display);font-size:1.5rem}
+.filters{display:flex;flex-wrap:wrap;gap:.4rem}
+.filters button{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:.35rem .9rem;font-weight:600;font-size:.85rem}
+.filters button[aria-pressed="true"]{background:var(--bar-bg);color:var(--bar-ink);border-color:var(--bar-bg)}
+.review{display:grid;gap:1rem;padding-bottom:3rem}
+.ri{padding:1.2rem 1.3rem}
+.ri-head{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-bottom:.6rem}
+.tag{border-radius:999px;font-size:.75rem;font-weight:700;padding:.15rem .65rem}
+.tag.ok{background:var(--ok-soft);color:var(--ok)}.tag.no{background:var(--bad-soft);color:var(--bad)}.tag.nil{background:var(--gold-soft);color:var(--ink)}
+.ri-q{font-weight:600;margin-bottom:.8rem}
+.ro{display:flex;gap:.7rem;align-items:flex-start;border:1.5px solid var(--line);border-radius:10px;padding:.55rem .75rem;margin-bottom:.45rem;background:var(--surface-2)}
+.ro .l{flex:none;width:1.7rem;height:1.7rem;border-radius:50%;display:grid;place-items:center;font-size:.85rem;font-weight:700;border:1.5px solid var(--line);background:var(--surface)}
+.ro .t{flex:1;min-width:0;overflow-wrap:anywhere}.ro .m{flex:none;font-size:.75rem;font-weight:700}
+.ro.right{border-color:var(--ok);background:var(--ok-soft)}.ro.right .l{background:var(--ok);color:#fff;border-color:var(--ok)}.ro.right .m{color:var(--ok)}
+.ro.wrong{border-color:var(--bad);background:var(--bad-soft)}.ro.wrong .l{background:var(--bad);color:#fff;border-color:var(--bad)}.ro.wrong .m{color:var(--bad)}
+.pemb{margin-top:.8rem;background:var(--teal-soft);border-left:5px solid var(--teal);border-radius:8px;padding:.75rem 1rem}
+.pemb b{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:.2rem}
+
+/* ===== MODAL ===== */
+.back{position:fixed;inset:0;z-index:100;background:rgba(6,16,26,.78);display:grid;place-items:center;padding:16px;overflow:auto}
+.modal{max-width:460px;width:100%;padding:1.5rem;display:grid;gap:.9rem;border-top:8px solid var(--gold)}
+.modal.danger{border-top-color:var(--red)}
+.modal h2{font-family:var(--f-display);font-size:1.4rem}
+.modal .reason{background:var(--red-soft);border-radius:10px;padding:.6rem .8rem;font-weight:600}
+.modal .btns{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:flex-end}
+.tokenbox{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:1.8rem;font-weight:700;letter-spacing:.14em;text-align:center;background:var(--surface-2);border:2px dashed var(--teal);border-radius:12px;padding:.8rem}
+.nosel{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+input{-webkit-user-select:text;user-select:text}
+
+@media (max-width:900px){
+  .start{grid-template-columns:1fr}
+  .start-hero{padding-bottom:3rem}
+  .start-side{padding:1.5rem max(16px,env(safe-area-inset-right,0px)) 2rem max(16px,env(safe-area-inset-left,0px))}
+  .exam-grid{grid-template-columns:1fr}
+  .navcol{position:static}
+  .res-hero-in{grid-template-columns:1fr;justify-items:center;text-align:center}
+  .idl{text-align:left}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:520px){
+  .row2,.idl{grid-template-columns:1fr}
+  .qcard{padding:1.1rem}
+  #qText{font-size:1.05rem}
+  .actions .btn{padding:.7rem .75rem;font-size:.9rem}
+  .btn .lbl{display:none}.btn .lbl-s{display:inline}
+}
+.lbl-s{display:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<!-- ===================== MULAI ===================== -->
+<section id="screenStart">
+  <div class="start">
+    <aside class="start-hero">
+      <p class="eyebrow">Tahun Pelajaran 2026/2027</p>
+      <h1>Ujian Akhir Semester Ganjil</h1>
+      <p class="sub">Bahasa Lampung · Kelas X</p>
+      <ul class="facts">
+        <li><b id="factSoal">50</b> soal pilihan ganda</li>
+        <li><b id="factMenit">90</b> menit</li>
+        <li><b>1×</b> peringatan</li>
+      </ul>
+      <div class="rules">
+        <h2>Tata tertib ujian</h2>
+        <ol>
+          <li>Ujian berjalan dalam <strong>layar penuh</strong>. Jangan menutup atau memuat ulang halaman.</li>
+          <li>Berpindah tab, membuka jendela lain, atau keluar dari layar penuh dicatat sebagai <strong>pelanggaran</strong>.</li>
+          <li>Pelanggaran pertama mendapat <strong>satu kali peringatan</strong>. Pelanggaran kedua mengakhiri ujian otomatis.</li>
+          <li>Urutan soal dan pilihan jawaban diacak untuk setiap siswa.</li>
+          <li>Menyalin, menempel, dan klik kanan dinonaktifkan.</li>
+        </ol>
+      </div>
+      <p class="motto">Sai Bumi Ruwa Jurai</p>
+      <div class="tumpal" aria-hidden="true"></div>
+    </aside>
+    <div class="start-side">
+      <form id="formStart" class="start-form card" novalidate autocomplete="off">
+        <h2>Data Peserta Didik</h2>
+        <p class="lead">Isi data dengan benar. Data ini tampil di lembar hasil.</p>
+        <div class="field"><label for="fNama">Nama lengkap</label><input id="fNama" name="nama" type="text" maxlength="60" placeholder="Contoh: Ahmad Rizki Pratama" required></div>
+        <div class="row2">
+          <div class="field"><label for="fKelas">Kelas</label><input id="fKelas" name="kelas" type="text" maxlength="14" placeholder="X IPA 1" required></div>
+          <div class="field"><label for="fNomor">Nomor peserta didik</label><input id="fNomor" name="nomor" type="text" inputmode="numeric" maxlength="20" placeholder="NISN / No. peserta" required></div>
+        </div>
+        <div class="field"><label for="fSekolah">Asal sekolah</label><input id="fSekolah" name="sekolah" type="text" maxlength="70" placeholder="Contoh: SMA Negeri 1 Kalianda" required></div>
+        <div class="field token-field"><label for="fToken">Token ujian</label><input id="fToken" name="token" type="text" maxlength="12" placeholder="LMP-XXXXX" required><span class="hint" style="font-size:.78rem;color:var(--muted)">Token diberikan pengawas ruang dan berlaku untuk hari ini.</span></div>
+        <p class="err" id="startErr" role="alert"></p>
+        <button class="btn btn-primary" type="submit" id="btnStart">Mulai Ujian</button>
+        <button class="linkbtn" type="button" id="btnAdmin">Panel pengawas</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== UJIAN ===================== -->
+<section id="screenExam" class="nosel" hidden>
+  <header class="bar">
+    <div class="wrap bar-in">
+      <div class="who"><b id="barNama"></b><span id="barInfo"></span></div>
+      <span class="chip" id="chipWarn">Peringatan 0/1</span>
+      <div class="timer" id="timer" role="timer" aria-label="Sisa waktu">00:00</div>
+    </div>
+    <div class="pbar" aria-hidden="true"><i id="pfill"></i></div>
+  </header>
+  <div class="tumpal" aria-hidden="true"></div>
+  <div class="wrap exam-grid">
+    <main>
+      <article class="qcard card">
+        <div class="qmeta"><span class="qno" id="qNo">Soal 1</span><span class="topic" id="qTopic"></span><span class="badge-doubt" id="qDoubt" hidden>Ragu-ragu</span></div>
+        <h2 id="qText"></h2>
+        <div class="opts" id="opts" role="radiogroup" aria-label="Pilihan jawaban"></div>
+      </article>
+    </main>
+    <aside class="navcol card" aria-label="Navigasi soal">
+      <h3>Navigasi Soal</h3>
+      <div class="counts">
+        <div class="c-ans"><b id="cAns">0</b>Dijawab</div>
+        <div class="c-doubt"><b id="cDoubt">0</b>Ragu-ragu</div>
+        <div class="c-none"><b id="cNone">0</b>Belum</div>
+      </div>
+      <div class="ngrid" id="ngrid"></div>
+      <button class="btn btn-primary" id="btnFinish" type="button">Selesaikan Ujian</button>
+    </aside>
+  </div>
+  <div class="actions">
+    <div class="actions-in">
+      <button class="btn btn-ghost" id="btnPrev" type="button">← <span class="lbl">Sebelumnya</span><span class="lbl-s">Kembali</span></button>
+      <button class="btn btn-doubt" id="btnDoubt" type="button" aria-pressed="false">Ragu-ragu</button>
+      <button class="btn btn-teal" id="btnNext" type="button"><span class="lbl">Selanjutnya</span><span class="lbl-s">Lanjut</span> →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HASIL ===================== -->
+<section id="screenResult" hidden>
+  <div class="res-hero">
+    <div class="wrap res-hero-in">
+      <div class="score"><span>Nilai akhir</span><b id="rScore">0</b><span>dari 100</span></div>
+      <div class="res-info">
+        <p class="eyebrow" style="color:var(--gold)">Hasil Ujian Akhir Semester Ganjil · Bahasa Lampung X</p>
+        <h1 id="rNama"></h1>
+        <p class="pred" id="rPred"></p>
+        <dl class="idl">
+          <div><dt>Kelas</dt><dd id="rKelas"></dd></div>
+          <div><dt>Nomor peserta didik</dt><dd id="rNomor"></dd></div>
+          <div><dt>Asal sekolah</dt><dd id="rSekolah"></dd></div>
+          <div><dt>Waktu pengerjaan</dt><dd id="rDurasi"></dd></div>
+        </dl>
+        <div class="status" id="rStatus"></div>
+      </div>
+    </div>
+    <div class="tumpal" aria-hidden="true"></div>
+  </div>
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat card ok"><b id="sBenar">0</b><span>Jawaban benar</span></div>
+      <div class="stat card no"><b id="sSalah">0</b><span>Jawaban salah</span></div>
+      <div class="stat card"><b id="sKosong">0</b><span>Tidak dijawab</span></div>
+      <div class="stat card"><b>2</b><span>Poin per soal</span></div>
+    </div>
+    <div class="toolbar">
+      <h2>Jawaban dan Pembahasan</h2>
+      <div class="filters" id="filters">
+        <button type="button" data-f="all" aria-pressed="true">Semua</button>
+        <button type="button" data-f="ok" aria-pressed="false">Benar</button>
+        <button type="button" data-f="no" aria-pressed="false">Salah</button>
+        <button type="button" data-f="nil" aria-pressed="false">Kosong</button>
+      </div>
+      <button class="btn btn-ghost" id="btnCopy" type="button">Salin ringkasan hasil</button>
+    </div>
+    <div class="review" id="review"></div>
+  </div>
+</section>
+
+<!-- ===================== MODAL ===================== -->
+<div class="back" id="mWarn" hidden role="alertdialog" aria-modal="true" aria-labelledby="mWarnT">
+  <div class="modal card danger">
+    <h2 id="mWarnT">Peringatan Kecurangan</h2>
+    <p class="reason" id="mWarnReason"></p>
+    <p>Ini <strong>satu-satunya peringatan</strong>. Jika pelanggaran terjadi lagi, ujian berakhir otomatis dan nilai dihitung dari jawaban yang sudah terisi. Waktu ujian tetap berjalan.</p>
+    <div class="btns"><button class="btn btn-primary" id="btnWarnOk" type="button">Saya mengerti, lanjutkan ujian</button></div>
+  </div>
+</div>
+
+<div class="back" id="mConfirm" hidden role="dialog" aria-modal="true" aria-labelledby="mConfT">
+  <div class="modal card">
+    <h2 id="mConfT">Selesaikan ujian?</h2>
+    <p id="mConfBody"></p>
+    <p>Setelah diselesaikan, jawaban tidak dapat diubah.</p>
+    <div class="btns"><button class="btn btn-ghost" id="btnConfNo" type="button">Kembali ke soal</button><button class="btn btn-primary" id="btnConfYes" type="button">Ya, selesaikan</button></div>
+  </div>
+</div>
+
+<div class="back" id="mResume" hidden role="alertdialog" aria-modal="true" aria-labelledby="mResT">
+  <div class="modal card danger">
+    <h2 id="mResT">Lanjutkan ujian</h2>
+    <p id="mResBody"></p>
+    <div class="btns"><button class="btn btn-primary" id="btnResume" type="button">Lanjutkan</button></div>
+  </div>
+</div>
+
+<div class="back" id="mAdmin" hidden role="dialog" aria-modal="true" aria-labelledby="mAdmT">
+  <div class="modal card">
+    <h2 id="mAdmT">Panel Pengawas</h2>
+    <div id="admLock" style="display:grid;gap:.6rem">
+      <div class="field"><label for="admPin">PIN pengawas</label><input id="admPin" type="password" inputmode="numeric" maxlength="12" autocomplete="off"></div>
+      <p class="err" id="admErr"></p>
+      <button class="btn btn-teal" id="btnAdmOpen" type="button">Buka</button>
+    </div>
+    <div id="admOpen" style="display:grid;gap:.8rem" hidden>
+      <p>Token ujian hari ini. Bagikan ke peserta di ruang ujian.</p>
+      <div class="tokenbox" id="admToken"></div>
+      <button class="btn btn-ghost" id="btnAdmReset" type="button">Hapus data ujian di perangkat ini</button>
+      <p class="err" id="admMsg" style="color:var(--ok)"></p>
+    </div>
+    <div class="btns"><button class="btn btn-ghost" id="btnAdmClose" type="button">Tutup</button></div>
+  </div>
+</div>
+
+<script>
+/* ============ KONFIGURASI ============ */
+const CONFIG = {
+  durasiMenit: 90,          // lama ujian
+  pinPengawas: "2026",      // PIN panel pengawas (ubah sesuai kebutuhan)
+  saltToken: "LMP-X-GANJIL-2026", // ubah untuk mengganti pola token harian
+  batasMenitMerah: 5
+};
+const QUESTIONS = [{"id": 1, "topik": "Piil Pesenggiri", "q": "Secara harfiah, piil pesenggiri dalam masyarakat Lampung berarti ...", "o": ["harga diri dan kehormatan hidup", "tata cara berpakaian adat", "jenis kesenian tradisional", "hukum pidana adat"], "a": 0, "p": "Secara harfiah piil berarti harga diri, dan pesenggiri berarti yang bernilai atau bermoral tinggi. Piil pesenggiri adalah falsafah hidup orang Lampung untuk menjaga harga diri dan kehormatan."}, {"id": 2, "topik": "Piil Pesenggiri", "q": "Berikut ini yang BUKAN termasuk unsur piil pesenggiri adalah ...", "o": ["juluk adok", "begawi cakak pepadun", "nemui nyimah", "sakai sambayan"], "a": 1, "p": "Piil pesenggiri memiliki empat unsur: juluk adok, nemui nyimah, nengah nyampur, dan sakai sambayan. Begawi cakak pepadun adalah upacara adat pengambilan gelar pada masyarakat Pepadun, bukan unsur piil pesenggiri."}, {"id": 3, "topik": "Piil Pesenggiri", "q": "Juluk adok memiliki arti ...", "o": ["kewajiban menghormati orang tua", "kemampuan bergaul dengan semua golongan", "nama panggilan dan gelar adat yang diberikan kepada seseorang", "kebiasaan saling membantu dalam pekerjaan"], "a": 2, "p": "Juluk adok terdiri dari juluk (nama panggilan) dan adok (gelar adat). Keduanya diberikan kepada seseorang menurut tahapan hidupnya dalam adat."}, {"id": 4, "topik": "Piil Pesenggiri", "q": "Nemui nyimah berarti ...", "o": ["suka menyendiri dan menutup diri", "hanya bergaul dengan keluarga sendiri", "bekerja sendiri tanpa bantuan orang lain", "ramah, terbuka, dan murah hati dalam menerima tamu"], "a": 3, "p": "Nemui nyimah adalah sikap ramah, terbuka, dan murah hati, terutama dalam menerima tamu serta berbagi dengan sesama."}, {"id": 5, "topik": "Piil Pesenggiri", "q": "Sikap pandai bergaul dan mau berbaur dengan semua lapisan masyarakat disebut ...", "o": ["nengah nyampur", "juluk adok", "nemui nyimah", "sakai sambayan"], "a": 0, "p": "Nengah nyampur berarti hidup di tengah masyarakat dan berbaur. Sikap ini menggambarkan orang yang pandai bergaul dengan semua lapisan."}, {"id": 6, "topik": "Piil Pesenggiri", "q": "Sikap gotong royong dan saling tolong-menolong dalam piil pesenggiri disebut ...", "o": ["juluk adok", "sakai sambayan", "nemui nyimah", "nengah nyampur"], "a": 1, "p": "Sakai sambayan adalah semangat gotong royong dan saling tolong-menolong dalam kehidupan bermasyarakat."}, {"id": 7, "topik": "Piil Pesenggiri", "q": "Seorang siswa aktif mengikuti kegiatan OSIS dan bergaul dengan teman dari berbagai suku. Sikap ini mencerminkan prinsip ...", "o": ["juluk adok", "sakai sambayan", "nengah nyampur", "nemui nyimah"], "a": 2, "p": "Aktif di OSIS dan bergaul dengan teman dari berbagai suku menunjukkan sikap berbaur dengan banyak kalangan, yaitu nengah nyampur."}, {"id": 8, "topik": "Piil Pesenggiri", "q": "Keluarga Pak Rudi menjamu tamu yang datang dengan hidangan terbaik dan sikap ramah. Hal ini sesuai dengan prinsip ...", "o": ["nengah nyampur", "juluk adok", "sakai sambayan", "nemui nyimah"], "a": 3, "p": "Menjamu tamu dengan hidangan terbaik dan sikap ramah adalah wujud nemui nyimah."}, {"id": 9, "topik": "Piil Pesenggiri", "q": "Warga satu kampung bersama-sama membantu tetangga yang mengadakan hajatan tanpa mengharapkan imbalan. Hal ini mencerminkan prinsip ...", "o": ["sakai sambayan", "nemui nyimah", "juluk adok", "nengah nyampur"], "a": 0, "p": "Warga yang bersama-sama membantu hajatan tetangga tanpa imbalan menunjukkan gotong royong, yaitu sakai sambayan."}, {"id": 10, "topik": "Piil Pesenggiri", "q": "Bagi masyarakat Lampung, piil pesenggiri berfungsi sebagai ...", "o": ["nama alat musik tradisional", "pandangan hidup dan pedoman bersikap dalam bermasyarakat", "jenis makanan khas daerah", "nama upacara perkawinan"], "a": 1, "p": "Piil pesenggiri berfungsi sebagai pandangan hidup dan pedoman bersikap dalam bermasyarakat bagi orang Lampung, bukan nama benda atau upacara tertentu."}, {"id": 11, "topik": "Kecamatan di Kabupaten Lampung Selatan", "q": "Ibu kota Kabupaten Lampung Selatan adalah ...", "o": ["Natar", "Sidomulyo", "Kalianda", "Bakauheni"], "a": 2, "p": "Ibu kota Kabupaten Lampung Selatan adalah Kalianda. Natar, Sidomulyo, dan Bakauheni adalah kecamatan."}, {"id": 12, "topik": "Kecamatan di Kabupaten Lampung Selatan", "q": "Kampus Institut Teknologi Sumatera (ITERA) terletak di Kecamatan ...", "o": ["Kalianda", "Penengahan", "Rajabasa", "Jati Agung"], "a": 3, "p": "Kampus ITERA berada di Kecamatan Jati Agung, Kabupaten Lampung Selatan."}, {"id": 13, "topik": "Kecamatan di Kabupaten Lampung Selatan", "q": "Berikut ini yang BUKAN kecamatan di Kabupaten Lampung Selatan adalah ...", "o": ["Kota Agung", "Katibung", "Sidomulyo", "Natar"], "a": 0, "p": "Kota Agung adalah ibu kota Kabupaten Tanggamus, bukan kecamatan di Lampung Selatan. Katibung, Sidomulyo, dan Natar termasuk Lampung Selatan."}, {"id": 14, "topik": "Kecamatan di Kabupaten Lampung Selatan", "q": "Bandar Udara Radin Inten II terletak di Kecamatan ...", "o": ["Bakauheni", "Natar", "Kalianda", "Sragi"], "a": 1, "p": "Bandar Udara Radin Inten II berada di Kecamatan Natar, Lampung Selatan."}, {"id": 15, "topik": "Kecamatan di Kabupaten Lampung Selatan", "q": "Jumlah kecamatan di Kabupaten Lampung Selatan saat ini adalah ...", "o": ["12 kecamatan", "15 kecamatan", "17 kecamatan", "20 kecamatan"], "a": 2, "p": "Kabupaten Lampung Selatan terdiri dari 17 kecamatan."}, {"id": 16, "topik": "Kecamatan di Kabupaten Lampung Selatan", "q": "Kecamatan yang berada di ujung selatan Pulau Sumatera dan memiliki pelabuhan penyeberangan ke Pulau Jawa adalah ...", "o": ["Natar", "Candipuro", "Way Panji", "Bakauheni"], "a": 3, "p": "Bakauheni berada di ujung selatan Pulau Sumatera dan memiliki pelabuhan penyeberangan ke Pulau Jawa (Merak)."}, {"id": 17, "topik": "Kecamatan di Kabupaten Lampung Selatan", "q": "Kecamatan di Lampung Selatan yang namanya diawali kata \"Way\" adalah ...", "o": ["Way Panji dan Way Sulan", "Way Kanan dan Way Tenong", "Way Halim dan Way Dadi", "Way Lima dan Way Khilau"], "a": 0, "p": "Dua kecamatan di Lampung Selatan yang diawali kata Way adalah Way Panji dan Way Sulan. Way Kanan adalah nama kabupaten lain."}, {"id": 18, "topik": "Kecamatan di Kabupaten Lampung Selatan", "q": "Berikut ini kecamatan yang benar berada di Kabupaten Lampung Selatan adalah ...", "o": ["Gedong Tataan", "Merbau Mataram", "Pagelaran", "Panjang"], "a": 1, "p": "Merbau Mataram adalah kecamatan di Lampung Selatan. Gedong Tataan berada di Pesawaran, Pagelaran di Pringsewu, dan Panjang di Kota Bandar Lampung."}, {"id": 19, "topik": "Kecamatan di Kabupaten Lampung Selatan", "q": "Kecamatan di Lampung Selatan yang namanya diawali kata \"Tanjung\" adalah ...", "o": ["Tanjung Karang dan Tanjung Raya", "Tanjung Senang dan Tanjung Agung", "Tanjung Bintang dan Tanjung Sari", "Tanjung Raja dan Tanjung Lago"], "a": 2, "p": "Tanjung Bintang dan Tanjung Sari adalah kecamatan di Lampung Selatan. Pasangan lain tidak seluruhnya berada di kabupaten ini."}, {"id": 20, "topik": "Kecamatan di Kabupaten Lampung Selatan", "q": "Gunung Anak Krakatau secara administratif termasuk wilayah Kecamatan ...", "o": ["Bakauheni", "Katibung", "Tanjung Bintang", "Rajabasa"], "a": 3, "p": "Gunung Anak Krakatau secara administratif termasuk wilayah Kecamatan Rajabasa, Lampung Selatan."}, {"id": 21, "topik": "Aksara Lampung", "q": "Aksara Lampung dalam bahasa Lampung disebut juga ...", "o": ["Had Lampung", "Hanacaraka", "Lontara", "Pegon"], "a": 0, "p": "Aksara Lampung disebut juga Had Lampung (Kaganga). Hanacaraka adalah aksara Jawa, sedangkan Lontara adalah aksara Bugis-Makassar."}, {"id": 22, "topik": "Aksara Lampung", "q": "Jumlah huruf induk (induk surat) dalam aksara Lampung adalah ...", "o": ["18 huruf", "20 huruf", "23 huruf", "26 huruf"], "a": 1, "p": "Huruf induk (kelabai surat) aksara Lampung berjumlah 20 huruf."}, {"id": 23, "topik": "Aksara Lampung", "q": "Aksara Lampung ditulis dengan arah ...", "o": ["dari kanan ke kiri", "dari atas ke bawah", "dari kiri ke kanan", "dari bawah ke atas"], "a": 2, "p": "Aksara Lampung ditulis dari kiri ke kanan, seperti huruf Latin."}, {"id": 24, "topik": "Aksara Lampung", "q": "Aksara Lampung termasuk rumpun aksara ...", "o": ["Latin yang berasal dari Romawi", "Arab yang berasal dari Timur Tengah", "Hanzi yang berasal dari Tiongkok", "Brahmi (Pallawa) yang berasal dari India"], "a": 3, "p": "Aksara Lampung berkerabat dengan rumpun aksara Brahmi (Pallawa) yang berasal dari India."}, {"id": 25, "topik": "Aksara Lampung", "q": "Urutan huruf induk aksara Lampung yang benar dari awal adalah ...", "o": ["ka, ga, nga, pa, ba, ma, ta, da, na", "ka, nga, ga, ba, pa, ma, da, ta, na", "ga, ka, nga, ma, ba, pa, na, ta, da", "pa, ba, ma, ka, ga, nga, ta, da, na"], "a": 0, "p": "Urutan huruf induk dimulai ka, ga, nga, pa, ba, ma, ta, da, na, lalu dilanjutkan ca, ja, nya, ya, a, la, ra, sa, wa, ha, gha."}, {"id": 26, "topik": "Aksara Lampung", "q": "Huruf induk aksara Lampung yang berada pada urutan terakhir adalah ...", "o": ["ha", "gha", "wa", "sa"], "a": 1, "p": "Urutan huruf induk ditutup oleh gha, setelah wa dan ha."}, {"id": 27, "topik": "Aksara Lampung", "q": "Setiap huruf induk aksara Lampung pada dasarnya dibaca dengan bunyi ...", "o": ["konsonan diikuti vokal \"i\"", "vokal saja tanpa konsonan", "konsonan diikuti vokal \"a\"", "konsonan mati"], "a": 2, "p": "Setiap huruf induk pada dasarnya dibaca konsonan diikuti vokal a, misalnya ka, ga, pa."}, {"id": 28, "topik": "Aksara Lampung", "q": "Salah satu upaya melestarikan aksara Lampung adalah ...", "o": ["menggantinya sepenuhnya dengan huruf Latin", "melarang penggunaannya di sekolah", "menyimpannya tanpa pernah dipelajari", "menuliskannya pada papan nama instansi dan mempelajarinya di sekolah"], "a": 3, "p": "Pelestarian aksara dilakukan dengan menuliskannya, misalnya pada papan nama instansi, dan mempelajarinya di sekolah."}, {"id": 29, "topik": "Anak Huruf", "q": "Anak huruf (anak surat) dalam aksara Lampung adalah ...", "o": ["tanda tambahan yang melekat pada huruf induk untuk mengubah bunyinya", "huruf-huruf pokok yang berjumlah 20", "lambang bilangan dalam aksara Lampung", "tanda baca akhir kalimat"], "a": 0, "p": "Anak huruf (anak surat) adalah tanda tambahan yang melekat pada huruf induk untuk mengubah atau menambah bunyinya."}, {"id": 30, "topik": "Anak Huruf", "q": "Anak huruf dapat diletakkan pada posisi ...", "o": ["hanya di atas huruf induk", "di atas, di bawah, dan di samping kanan huruf induk", "hanya di bawah huruf induk", "di tengah-tengah huruf induk"], "a": 1, "p": "Anak huruf dapat berada di atas, di bawah, dan di samping kanan huruf induk."}, {"id": 31, "topik": "Anak Huruf", "q": "Anak huruf ulan menghasilkan bunyi vokal ...", "o": ["u", "e", "i", "o"], "a": 2, "p": "Anak huruf ulan diletakkan di atas huruf induk dan menghasilkan bunyi vokal i."}, {"id": 32, "topik": "Anak Huruf", "q": "Anak huruf bitan menghasilkan bunyi vokal ...", "o": ["i", "e", "a", "u"], "a": 3, "p": "Anak huruf bitan diletakkan di bawah huruf induk dan menghasilkan bunyi vokal u."}, {"id": 33, "topik": "Anak Huruf", "q": "Anak huruf bicek menghasilkan bunyi vokal ...", "o": ["e", "i", "u", "a"], "a": 0, "p": "Anak huruf bicek diletakkan di atas huruf induk dan menghasilkan bunyi vokal e."}, {"id": 34, "topik": "Anak Huruf", "q": "Huruf induk \"ka\" yang ditambah anak huruf ulan dibaca ...", "o": ["ku", "ki", "ke", "kang"], "a": 1, "p": "Huruf induk ka ditambah ulan (bunyi i) dibaca ki."}, {"id": 35, "topik": "Anak Huruf", "q": "Huruf induk \"pa\" yang ditambah anak huruf bitan dibaca ...", "o": ["pi", "pe", "pu", "pang"], "a": 2, "p": "Huruf induk pa ditambah bitan (bunyi u) dibaca pu."}, {"id": 36, "topik": "Anak Huruf", "q": "Anak huruf yang diletakkan di atas huruf induk adalah ...", "o": ["bitan dan ulan", "bitan saja", "bicek dan bitan", "ulan dan bicek"], "a": 3, "p": "Ulan dan bicek diletakkan di atas huruf induk, sedangkan bitan berada di bawahnya."}, {"id": 37, "topik": "Sesat Agung", "q": "Sesat agung merupakan ...", "o": ["balai adat tempat bermusyawarah dan melaksanakan upacara adat", "alat musik tradisional Lampung", "tarian penyambutan tamu", "kain tenun khas Lampung"], "a": 0, "p": "Sesat agung adalah balai adat tempat bermusyawarah dan melaksanakan upacara adat."}, {"id": 38, "topik": "Sesat Agung", "q": "Sebutan lain untuk bangunan balai adat sesat agung adalah ...", "o": ["Rumah Gadang", "Nuwo Sesat", "Joglo", "Honai"], "a": 1, "p": "Bangunan balai adat sesat agung juga disebut Nuwo Sesat. Rumah Gadang, Joglo, dan Honai berasal dari daerah lain."}, {"id": 39, "topik": "Sesat Agung", "q": "Berikut ini yang BUKAN fungsi sesat agung adalah ...", "o": ["tempat musyawarah adat", "tempat upacara adat", "tempat berdagang dan pasar harian", "tempat pertemuan para penyimbang adat"], "a": 2, "p": "Sesat agung berfungsi untuk musyawarah, upacara adat, dan pertemuan para penyimbang. Berdagang dan pasar harian bukan fungsinya."}, {"id": 40, "topik": "Sesat Agung", "q": "Bangunan sesat agung pada umumnya berbentuk ...", "o": ["rumah susun beton bertingkat", "bangunan tanpa dinding berlantai tanah", "tenda dari bambu", "rumah panggung dari kayu"], "a": 3, "p": "Sesat agung umumnya berbentuk rumah panggung dari kayu, ciri bangunan adat Lampung."}, {"id": 41, "topik": "Sesat Agung", "q": "Tokoh yang dituakan dan memimpin adat dalam musyawarah di sesat agung disebut ...", "o": ["penyimbang", "juru masak", "penari", "pedagang"], "a": 0, "p": "Penyimbang adalah tokoh adat yang dituakan dan memimpin musyawarah adat di sesat agung."}, {"id": 42, "topik": "Sesat Agung", "q": "Dua kelompok adat besar dalam masyarakat Lampung adalah ...", "o": ["Jawa dan Sunda", "Pepadun dan Saibatin", "Minang dan Batak", "Bugis dan Makassar"], "a": 1, "p": "Masyarakat adat Lampung terbagi atas dua kelompok besar: Pepadun dan Saibatin."}, {"id": 43, "topik": "Sesat Agung", "q": "Sikap yang tepat bagi generasi muda terhadap sesat agung adalah ...", "o": ["membiarkannya rusak", "membongkarnya untuk dijual", "ikut menjaga, merawat, dan memanfaatkannya untuk kegiatan adat", "menganggapnya tidak penting"], "a": 2, "p": "Generasi muda sebaiknya ikut menjaga, merawat, dan memanfaatkan sesat agung untuk kegiatan adat agar tetap lestari."}, {"id": 44, "topik": "Kisah Lampung", "q": "Radin Inten II dikenal sebagai ...", "o": ["pedagang rempah dari Eropa", "penemu aksara Lampung", "raja Kerajaan Majapahit", "pahlawan nasional asal Lampung yang melawan Belanda"], "a": 3, "p": "Radin Inten II adalah pahlawan nasional asal Lampung yang melawan penjajah Belanda."}, {"id": 45, "topik": "Kisah Lampung", "q": "Keratuan Darah Putih, tempat Radin Inten II memimpin perlawanan terhadap Belanda, berada di wilayah ...", "o": ["Lampung Selatan", "Lampung Utara", "Way Kanan", "Tulang Bawang"], "a": 0, "p": "Keratuan Darah Putih, pusat perlawanan Radin Inten II, berada di wilayah Lampung Selatan."}, {"id": 46, "topik": "Kisah Lampung", "q": "Menurut tambo (cerita sejarah), asal-usul masyarakat adat Lampung berasal dari kerajaan ...", "o": ["Majapahit", "Sekala Brak", "Mataram", "Demak"], "a": 1, "p": "Menurut tambo, asal-usul masyarakat adat Lampung berasal dari Kerajaan Sekala Brak di kaki Gunung Pesagi."}, {"id": 47, "topik": "Kisah Lampung", "q": "Gunung tertinggi di Lampung yang berkaitan dengan legenda Sekala Brak adalah ...", "o": ["Gunung Rajabasa", "Gunung Tanggamus", "Gunung Pesagi", "Gunung Krakatau"], "a": 2, "p": "Gunung Pesagi, gunung tertinggi di Lampung, berkaitan erat dengan legenda Sekala Brak."}, {"id": 48, "topik": "Kisah Lampung", "q": "Radin Inten II gugur dalam perjuangan melawan Belanda pada tahun ...", "o": ["1945", "1908", "1798", "1858"], "a": 3, "p": "Radin Inten II gugur dalam perjuangan melawan Belanda pada tahun 1858."}, {"id": 49, "topik": "Kisah Lampung", "q": "Nilai yang dapat diteladani dari perjuangan Radin Inten II adalah ...", "o": ["cinta tanah air dan keberanian membela kehormatan", "mementingkan diri sendiri", "mudah menyerah pada penjajah", "menyembunyikan identitas diri"], "a": 0, "p": "Dari perjuangan Radin Inten II dapat diteladani cinta tanah air dan keberanian membela kehormatan."}, {"id": 50, "topik": "Kisah Lampung", "q": "Paksi Pak dalam sejarah Sekala Brak berarti ...", "o": ["empat gunung", "empat kepaksian (empat kelompok adat)", "empat sungai", "empat pelabuhan"], "a": 1, "p": "Paksi berarti sayap atau kelompok dan pak berarti empat. Paksi Pak adalah empat kepaksian (empat kelompok adat) Sekala Brak."}];
+const KEY = "ujian-bahasa-lampung-x-ganjil-v1";
+const L = "ABCD";
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const byId = Object.fromEntries(QUESTIONS.map(q => [q.id, q]));
+
+/* ---------- penyimpanan (aman bila diblokir) ---------- */
+let memo = null;
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){ memo = JSON.stringify(S); } }
+function load(){ try{ const v = localStorage.getItem(KEY); if(v) return JSON.parse(v); }catch(e){} return memo ? JSON.parse(memo) : null; }
+function wipe(){ try{ localStorage.removeItem(KEY); }catch(e){} memo = null; }
+
+/* ---------- token harian ---------- */
+function dailyToken(d = new Date()){
+  const s = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+"|"+CONFIG.saltToken;
+  let h = 2166136261;
+  for(const c of s){ h ^= c.charCodeAt(0); h = Math.imul(h, 16777619) >>> 0; }
+  const a = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; let t = "";
+  for(let i=0;i<5;i++){ h = Math.imul(h ^ (h >>> 15), 2246822519) >>> 0; h = (h ^ (h >>> 13)) >>> 0; t += a[h % a.length]; }
+  return "LMP-" + t;
+}
+
+/* ---------- state ---------- */
+let S = null;          // data ujian aktif
+let lock = false, armedAt = 0, fsActive = false, maxW = 0, tick = null;
+
+function shuffle(a){ a = a.slice(); for(let i=a.length-1;i>0;i--){ const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]] = [a[j],a[i]]; } return a; }
+function show(id){ for(const s of ["screenStart","screenExam","screenResult"]) $("#"+s).hidden = (s !== id); window.scrollTo(0,0); }
+const fmt = ms => { ms = Math.max(0, ms); const t = Math.ceil(ms/1000), h = Math.floor(t/3600), m = Math.floor(t%3600/60), s = t%60;
+  return (h ? h+":" : "") + String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0"); };
+
+/* ============ MULAI ============ */
+$("#factSoal").textContent = QUESTIONS.length;
+$("#factMenit").textContent = CONFIG.durasiMenit;
+
+$("#formStart").addEventListener("submit", e => {
+  e.preventDefault();
+  const f = { nama:$("#fNama").value.trim(), kelas:$("#fKelas").value.trim(), nomor:$("#fNomor").value.trim(), sekolah:$("#fSekolah").value.trim() };
+  const tok = $("#fToken").value.trim().toUpperCase();
+  let bad = null;
+  for(const [k,id] of [["nama","fNama"],["kelas","fKelas"],["nomor","fNomor"],["sekolah","fSekolah"]]){
+    const el = $("#"+id); const empty = !f[k]; el.classList.toggle("bad", empty); if(empty && !bad) bad = el;
+  }
+  if(bad){ $("#startErr").textContent = "Lengkapi semua data peserta terlebih dahulu."; bad.focus(); return; }
+  if(tok !== dailyToken()){ $("#fToken").classList.add("bad"); $("#startErr").textContent = "Token tidak sesuai. Tanyakan token hari ini kepada pengawas."; $("#fToken").focus(); return; }
+  $("#fToken").classList.remove("bad"); $("#startErr").textContent = "";
+  const order = shuffle(QUESTIONS.map(q => q.id));
+  const perm = {}; QUESTIONS.forEach(q => perm[q.id] = shuffle([0,1,2,3]));
+  S = { student:f, order, perm, ans:{}, doubt:{}, cur:0, startedAt:Date.now(), endAt:Date.now()+CONFIG.durasiMenit*60000,
+        status:"running", warned:false, log:[], reason:null, finishedAt:null };
+  save(); beginExam(true);
+});
+for(const id of ["fNama","fKelas","fNomor","fSekolah","fToken"]) $("#"+id).addEventListener("input", e => e.target.classList.remove("bad"));
+
+function enterFs(){
+  const el = document.documentElement;
+  try{ const p = (el.requestFullscreen || el.webkitRequestFullscreen)?.call(el); if(p && p.catch) p.catch(()=>{}); }catch(e){}
+}
+function beginExam(fresh){
+  show("screenExam");
+  $("#barNama").textContent = S.student.nama;
+  $("#barInfo").textContent = "Kelas " + S.student.kelas + " · No. " + S.student.nomor + " · " + S.student.sekolah;
+  armedAt = Date.now() + 1500; lock = false; maxW = window.innerWidth;
+  if(fresh) enterFs();
+  renderQ(); updateWarnChip();
+  clearInterval(tick); tick = setInterval(onTick, 400); onTick();
+}
+
+/* ============ SOAL ============ */
+function renderQ(){
+  const i = S.cur, id = S.order[i], q = byId[id], perm = S.perm[id];
+  $("#qNo").textContent = "Soal " + (i+1);
+  $("#qTopic").textContent = q.topik;
+  $("#qText").textContent = q.q;
+  $("#qDoubt").hidden = !S.doubt[id];
+  const box = $("#opts"); box.innerHTML = "";
+  perm.forEach((orig, k) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "opt"; b.setAttribute("role","radio");
+    b.setAttribute("aria-checked", S.ans[id] === orig ? "true" : "false");
+    b.innerHTML = '<span class="l">'+L[k]+'</span><span class="t">'+esc(q.o[orig])+'</span>';
+    b.addEventListener("click", () => pick(orig));
+    box.appendChild(b);
+  });
+  const d = !!S.doubt[id];
+  $("#btnDoubt").setAttribute("aria-pressed", d); $("#btnDoubt").textContent = d ? "✓ Ragu-ragu" : "Ragu-ragu";
+  $("#btnPrev").disabled = i === 0;
+  const last = i === S.order.length-1;
+  $("#btnNext").innerHTML = last ? "Selesai ✓" : '<span class="lbl">Selanjutnya</span><span class="lbl-s">Lanjut</span> →';
+  $("#pfill").style.width = ((i+1)/S.order.length*100) + "%";
+  renderNav();
+}
+function renderNav(){
+  const g = $("#ngrid"); g.innerHTML = ""; let a = 0, d = 0, n = 0;
+  S.order.forEach((id, i) => {
+    const ans = S.ans[id] !== undefined, db = !!S.doubt[id];
+    if(db) d++; else if(ans) a++; else n++;
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = i+1;
+    b.className = "n" + (db ? " doubt" : ans ? " ans" : "") + (i === S.cur ? " cur" : "");
+    b.setAttribute("aria-label", "Soal "+(i+1)+", "+(db ? "ragu-ragu" : ans ? "sudah dijawab" : "belum dijawab"));
+    if(i === S.cur) b.setAttribute("aria-current","true");
+    b.addEventListener("click", () => go(i));
+    g.appendChild(b);
+  });
+  $("#cAns").textContent = a; $("#cDoubt").textContent = d; $("#cNone").textContent = n;
+}
+function go(i){ if(S.status !== "running") return; S.cur = Math.max(0, Math.min(S.order.length-1, i)); save(); renderQ(); }
+function pick(orig){ if(S.status !== "running") return; S.ans[S.order[S.cur]] = orig; save(); renderQ(); }
+$("#btnPrev").addEventListener("click", () => go(S.cur-1));
+$("#btnNext").addEventListener("click", () => { if(S.cur === S.order.length-1) askFinish(); else go(S.cur+1); });
+$("#btnDoubt").addEventListener("click", () => { const id = S.order[S.cur]; if(S.doubt[id]) delete S.doubt[id]; else S.doubt[id] = true; save(); renderQ(); });
+$("#btnFinish").addEventListener("click", askFinish);
+
+/* ============ SELESAI ============ */
+function askFinish(){
+  const total = S.order.length; let none = 0, doubt = 0;
+  S.order.forEach(id => { if(S.ans[id] === undefined) none++; if(S.doubt[id]) doubt++; });
+  let t = "Anda sudah menjawab " + (total-none) + " dari " + total + " soal.";
+  if(none) t += " Masih ada " + none + " soal belum dijawab.";
+  if(doubt) t += " Ada " + doubt + " soal bertanda ragu-ragu.";
+  $("#mConfBody").textContent = t; $("#mConfirm").hidden = false; $("#btnConfNo").focus();
+}
+$("#btnConfNo").addEventListener("click", () => $("#mConfirm").hidden = true);
+$("#btnConfYes").addEventListener("click", () => { $("#mConfirm").hidden = true; finish("manual"); });
+
+function finish(reason){
+  if(!S || S.status !== "running") return;
+  S.status = "done"; S.reason = reason; S.finishedAt = Math.min(Date.now(), S.endAt);
+  save(); clearInterval(tick);
+  for(const m of ["mWarn","mConfirm","mResume"]) $("#"+m).hidden = true;
+  try{ if(document.fullscreenElement) document.exitFullscreen(); }catch(e){}
+  showResult();
+}
+function onTick(){
+  if(!S || S.status !== "running") return;
+  const left = S.endAt - Date.now(), el = $("#timer");
+  el.textContent = fmt(left); el.classList.toggle("low", left <= CONFIG.batasMenitMerah*60000);
+  if(left <= 0) finish("time");
+}
+
+/* ============ ANTI CURANG ============ */
+function violation(reason){
+  if(!S || S.status !== "running" || lock || Date.now() < armedAt) return;
+  lock = true;
+  S.log.push({ t:Date.now(), reason });
+  if(S.warned){ finish("cheat"); return; }
+  S.warned = true; save(); updateWarnChip();
+  $("#mWarnReason").textContent = "Terdeteksi: " + reason + ".";
+  $("#mWarn").hidden = false; $("#btnWarnOk").focus();
+}
+$("#btnWarnOk").addEventListener("click", () => {
+  $("#mWarn").hidden = true; enterFs(); armedAt = Date.now() + 1200; lock = false; maxW = window.innerWidth;
+});
+function updateWarnChip(){ const c = $("#chipWarn"); c.textContent = "Peringatan " + (S.warned?1:0) + "/1"; c.classList.toggle("warn", S.warned); }
+
+document.addEventListener("visibilitychange", () => { if(document.hidden) violation("berpindah tab atau meminimalkan jendela"); });
+window.addEventListener("blur", () => { setTimeout(() => { if(!document.hasFocus()) violation("membuka jendela atau aplikasi lain"); }, 150); });
+document.addEventListener("fullscreenchange", () => {
+  if(document.fullscreenElement){ fsActive = true; maxW = 0; setTimeout(()=>{ maxW = window.innerWidth; }, 500); }
+  else if(fsActive){ fsActive = false; violation("keluar dari mode layar penuh"); }
+});
+window.addEventListener("resize", () => {
+  if(!S || S.status !== "running") return;
+  const w = window.innerWidth;
+  if(w > maxW) maxW = w;
+  if(screen.availWidth >= 900 && maxW && w < maxW*0.8) violation("mengubah ukuran jendela atau membuka layar terbelah");
+});
+window.addEventListener("beforeunload", e => { if(S && S.status === "running"){ e.preventDefault(); e.returnValue = ""; } });
+for(const ev of ["contextmenu","copy","cut","paste","dragstart","selectstart"]) document.addEventListener(ev, e => {
+  if(S && S.status === "running" && !(e.target.closest && e.target.closest("input"))) e.preventDefault();
+});
+document.addEventListener("keydown", e => {
+  if(!S || S.status !== "running") return;
+  if(!$("#mWarn").hidden || !$("#mConfirm").hidden) return;
+  const k = e.key, c = e.ctrlKey || e.metaKey;
+  if(k === "F12" || k === "PrintScreen" || (c && ["c","v","x","a","u","s","p","r"].includes(k.toLowerCase())) || (c && e.shiftKey && ["i","j","c","k"].includes(k.toLowerCase())) || k === "F5"){
+    e.preventDefault(); if(k === "PrintScreen"){ try{ navigator.clipboard.writeText(""); }catch(_){} } return;
+  }
+  if(e.target.closest && e.target.closest("input")) return;
+  if(k === "ArrowLeft") go(S.cur-1);
+  else if(k === "ArrowRight") go(S.cur+1);
+  else if("abcdABCD".includes(k) && k.length === 1){ const p = S.perm[S.order[S.cur]]; pick(p[L.indexOf(k.toUpperCase())]); }
+});
+
+/* ============ HASIL ============ */
+let filter = "all";
+function compute(){
+  let b = 0, s = 0, k = 0;
+  const items = S.order.map((id, i) => {
+    const q = byId[id], a = S.ans[id], st = a === undefined ? "nil" : (a === q.a ? "ok" : "no");
+    if(st === "ok") b++; else if(st === "no") s++; else k++;
+    return { i, q, a, st };
+  });
+  return { b, s, k, items, score: Math.round(b/QUESTIONS.length*100) };
+}
+function predikat(n){ return n >= 85 ? "Sangat Baik" : n >= 70 ? "Baik" : n >= 55 ? "Cukup" : "Perlu belajar lagi"; }
+function showResult(){
+  const r = compute(), st = S.student;
+  show("screenResult");
+  $("#rScore").textContent = r.score; $("#rPred").textContent = "Predikat: " + predikat(r.score);
+  $("#rNama").textContent = st.nama; $("#rKelas").textContent = st.kelas; $("#rNomor").textContent = st.nomor; $("#rSekolah").textContent = st.sekolah;
+  const dur = (S.finishedAt || Date.now()) - S.startedAt; $("#rDurasi").textContent = fmt(dur).replace(/^(\d{2}:\d{2})$/, "$1") + " dari " + CONFIG.durasiMenit + " menit";
+  const stEl = $("#rStatus"); stEl.className = "status";
+  if(S.reason === "cheat"){ stEl.classList.add("cheat"); stEl.textContent = "Ujian dihentikan otomatis karena pelanggaran kedua: " + (S.log[S.log.length-1]?.reason || "") + ". Nilai dihitung dari jawaban yang sudah terisi."; }
+  else if(S.reason === "time") stEl.textContent = "Waktu ujian habis. Jawaban terakhir otomatis dikumpulkan." + (S.warned ? " Peringatan kecurangan: 1 kali (" + S.log[0].reason + ")." : "");
+  else stEl.textContent = "Ujian diselesaikan." + (S.warned ? " Peringatan kecurangan: 1 kali (" + S.log[0].reason + ")." : " Tidak ada pelanggaran tercatat.");
+  $("#sBenar").textContent = r.b; $("#sSalah").textContent = r.s; $("#sKosong").textContent = r.k;
+  renderReview(r);
+}
+function renderReview(r){
+  const box = $("#review"); box.innerHTML = "";
+  r.items.filter(x => filter === "all" || x.st === filter).forEach(({i,q,a,st}) => {
+    const perm = S.perm[q.id];
+    const opts = perm.map((orig, k) => {
+      const right = orig === q.a, mine = orig === a;
+      const cls = right ? "right" : (mine ? "wrong" : "");
+      const mark = right ? (mine ? "✓ Jawaban Anda · benar" : "✓ Kunci jawaban") : (mine ? "✗ Jawaban Anda" : "");
+      return '<div class="ro '+cls+'"><span class="l">'+L[k]+'</span><span class="t">'+esc(q.o[orig])+'</span><span class="m">'+mark+'</span></div>';
+    }).join("");
+    const tag = st === "ok" ? '<span class="tag ok">Benar +2</span>' : st === "no" ? '<span class="tag no">Salah 0</span>' : '<span class="tag nil">Tidak dijawab 0</span>';
+    const el = document.createElement("article"); el.className = "ri card";
+    el.innerHTML = '<div class="ri-head"><span class="qno">Soal '+(i+1)+'</span><span class="topic">'+esc(q.topik)+'</span>'+tag+'</div>'
+      + '<p class="ri-q">'+esc(q.q)+'</p>'+opts+'<div class="pemb"><b>Pembahasan</b>'+esc(q.p)+'</div>';
+    box.appendChild(el);
+  });
+  if(!box.children.length) box.innerHTML = '<p class="card" style="padding:1.2rem">Tidak ada soal pada kategori ini.</p>';
+}
+$("#filters").addEventListener("click", e => {
+  const b = e.target.closest("button"); if(!b) return; filter = b.dataset.f;
+  document.querySelectorAll("#filters button").forEach(x => x.setAttribute("aria-pressed", x === b));
+  renderReview(compute());
+});
+$("#btnCopy").addEventListener("click", async () => {
+  const r = compute(), st = S.student;
+  const t = "HASIL UAS GANJIL BAHASA LAMPUNG KELAS X\nNama: "+st.nama+"\nKelas: "+st.kelas+"\nNo. Peserta Didik: "+st.nomor+"\nAsal Sekolah: "+st.sekolah+"\nBenar: "+r.b+" | Salah: "+r.s+" | Kosong: "+r.k+"\nNilai Akhir: "+r.score;
+  const btn = $("#btnCopy");
+  try{ await navigator.clipboard.writeText(t); btn.textContent = "Tersalin ✓"; }catch(e){ btn.textContent = "Salin tidak didukung"; }
+  setTimeout(() => btn.textContent = "Salin ringkasan hasil", 2000);
+});
+
+/* ============ PANEL PENGAWAS ============ */
+$("#btnAdmin").addEventListener("click", () => { $("#admPin").value = ""; $("#admErr").textContent = ""; $("#admLock").hidden = false; $("#admOpen").hidden = true; $("#mAdmin").hidden = false; $("#admPin").focus(); });
+$("#btnAdmClose").addEventListener("click", () => $("#mAdmin").hidden = true);
+$("#btnAdmOpen").addEventListener("click", () => {
+  if($("#admPin").value !== CONFIG.pinPengawas){ $("#admErr").textContent = "PIN salah."; return; }
+  $("#admLock").hidden = true; $("#admOpen").hidden = false; $("#admToken").textContent = dailyToken(); $("#admMsg").textContent = "";
+});
+$("#admPin").addEventListener("keydown", e => { if(e.key === "Enter"){ e.preventDefault(); $("#btnAdmOpen").click(); } });
+$("#btnAdmReset").addEventListener("click", () => { wipe(); S = null; $("#admMsg").textContent = "Data ujian di perangkat ini dihapus. Halaman siap untuk peserta berikutnya."; show("screenStart"); $("#mAdmin").hidden = false; });
+
+/* ============ PEMULIHAN SETELAH MUAT ULANG ============ */
+(function boot(){
+  const old = load(); if(!old || !old.student) return;
+  S = old;
+  if(S.status === "done"){ showResult(); return; }
+  if(Date.now() >= S.endAt){ S.status = "running"; finish("time"); return; }
+  show("screenStart");
+  $("#mResBody").textContent = "Halaman ujian sempat ditutup atau dimuat ulang, dan ini dicatat sebagai pelanggaran. " +
+    (S.warned ? "Karena peringatan sudah pernah diberikan, ujian akan diakhiri." : "Ini adalah satu-satunya peringatan Anda. Sisa waktu: " + fmt(S.endAt - Date.now()) + ".");
+  $("#mResume").hidden = false;
+})();
+$("#btnResume").addEventListener("click", () => {
+  $("#mResume").hidden = true;
+  if(S.warned){ S.log.push({ t:Date.now(), reason:"halaman ditutup atau dimuat ulang" }); finish("cheat"); return; }
+  S.warned = true; S.log.push({ t:Date.now(), reason:"halaman ditutup atau dimuat ulang" }); save();
+  beginExam(true);
+});
+</script>
+
+</body></html>
